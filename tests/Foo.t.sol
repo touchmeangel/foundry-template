@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.29 <0.9.0;
 
-import { Test } from "forge-std/src/Test.sol";
-import { console2 } from "forge-std/src/console2.sol";
+import { Test } from "forge-std/Test.sol";
+import { console2 } from "forge-std/console2.sol";
 
 import { Foo } from "../src/Foo.sol";
 
@@ -30,10 +30,10 @@ contract FooTest is Test {
 
     /// @dev Fuzz test that provides random values for an unsigned integer, but which rejects zero as an input.
     /// If you need more sophisticated input validation, you should use the `bound` utility instead.
-    /// See https://twitter.com/PaulRBerg/status/1622558791685242880
-    function testFuzz_Example(uint256 x) external view {
-        vm.assume(x != 0); // or x = bound(x, 1, 100)
-        assertEq(foo.echo(x), x, "value mismatch");
+    /// Foundry automatically runs this hundreds of times with random inputs
+    function testFuzz_example(uint256 amount) external view {
+        vm.assume(amount != 0); // or amount = bound(amount, 1, 100)
+        assertEq(foo.echo(amount), amount, "value mismatch");
     }
 
     /// @dev Fork test that runs against an Ethereum Mainnet fork. For this to work, you need to set `API_KEY_ALCHEMY`
