@@ -1,12 +1,10 @@
-# Foundry Template BUT minimalistic
+## Foundry Template BUT minimalistic
 
 [![Github Actions][gha-badge]][gha] [![Foundry][foundry-badge]][foundry] [![License: MIT][license-badge]][license]
 
 A minimalistic Solidity development template powered by Foundry. No bloat, just the essentials.
 
----
-
-## Quick Start
+### Quick Start
 
 **Use this template:**
 ```sh
@@ -18,15 +16,11 @@ Or click [`Use this template`](https://github.com/touchmeangel/foundry-template/
 
 **First time with Foundry?** → [Installation guide](https://github.com/foundry-rs/foundry#installation)
 
----
-
 ## Stack
 
 - **[Forge](https://github.com/foundry-rs/foundry/blob/master/forge)** - compile, test, fuzz, format, deploy
 - **[Forge Std](https://github.com/foundry-rs/forge-std)** - testing utilities & helpers
 - **[Solhint](https://github.com/protofire/solhint)** - Solidity linting
-
----
 
 ## Commands
 
@@ -53,23 +47,15 @@ forge script script/Deploy.s.sol --broadcast --fork-url http://localhost:8545 --
 
 📖 [Solidity Scripting Tutorial](https://book.getfoundry.sh/tutorials/solidity-scripting.html) for testnet/mainnet deployment
 
----
-
 ## Configuration Files
 
 Pre-configured sensible defaults:
 
 ```text
-.editorconfig      # Editor settings
 .gitignore         # Git exclusions
-.prettierignore    # Prettier exclusions
-.prettierrc.yml    # Code formatting
-.solhint.json      # Solidity linting
 foundry.toml       # Foundry config
 remappings.txt     # Dependency mappings
 ```
-
----
 
 ## Dependencies
 
@@ -87,8 +73,6 @@ dependency-name=lib/dependency-name
 
 *Example: OpenZeppelin Contracts comes pre-installed*
 
----
-
 ## Testing
 
 Import `Test` from `forge-std` and inherit in your test contracts:
@@ -105,16 +89,12 @@ contract MyTest is Test {
 📝 See example: [tests/Foo.t.sol](./tests/Foo.t.sol)  
 📖 Learn more: [Writing Tests](https://book.getfoundry.sh/forge/writing-tests.html)
 
----
-
 ## CI/CD
 
 GitHub Actions auto-configured:
 - Runs on every push/PR to `main`
 - Lints & tests your contracts
 - Edit workflow: [.github/workflows/ci.yml](./.github/workflows/ci.yml)
-
----
 
 ## Editor Setup
 
@@ -123,8 +103,6 @@ GitHub Actions auto-configured:
 📖 [VSCode integration guide](https://book.getfoundry.sh/config/vscode)
 
 *Template works with any IDE*
-
----
 
 ## Resources
 
@@ -140,13 +118,9 @@ GitHub Actions auto-configured:
 - [cleanunicorn/ethereum-smartcontract-template](https://github.com/cleanunicorn/ethereum-smartcontract-template)
 - [FrankieIsLost/forge-template](https://github.com/FrankieIsLost/forge-template)
 
----
-
 ## License
 
 MIT
-
----
 
 [gha]: https://github.com/touchmeangel/foundry-template/actions
 [gha-badge]: https://github.com/touchmeangel/foundry-template/actions/workflows/ci.yml/badge.svg
