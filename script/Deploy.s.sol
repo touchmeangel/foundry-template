@@ -2,12 +2,12 @@
 pragma solidity >=0.8.29 <0.9.0;
 
 import { Foo } from "../src/Foo.sol";
+import { Script } from "forge-std/src/Script.sol";
 
-import { BaseScript } from "./Base.s.sol";
-
-/// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/guides/scripting-with-solidity
-contract Deploy is BaseScript {
-    function run() public broadcast returns (Foo foo) {
+contract DeployBrowser is Script {
+    function run() public returns (Foo foo) {
+        vm.startBroadcast();
         foo = new Foo();
+        vm.stopBroadcast();
     }
 }
