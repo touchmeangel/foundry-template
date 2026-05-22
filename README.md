@@ -1,212 +1,156 @@
-# Foundry Template [![Open in Gitpod][gitpod-badge]][gitpod] [![Github Actions][gha-badge]][gha] [![Foundry][foundry-badge]][foundry] [![License: MIT][license-badge]][license]
+# Foundry Template BUT minimalistic
 
-[gitpod]: https://gitpod.io/#https://github.com/PaulRBerg/foundry-template
-[gitpod-badge]: https://img.shields.io/badge/Gitpod-Open%20in%20Gitpod-FFB45B?logo=gitpod
-[gha]: https://github.com/PaulRBerg/foundry-template/actions
-[gha-badge]: https://github.com/PaulRBerg/foundry-template/actions/workflows/ci.yml/badge.svg
-[foundry]: https://getfoundry.sh/
-[foundry-badge]: https://img.shields.io/badge/Built%20with-Foundry-FFDB1C.svg
-[license]: https://opensource.org/licenses/MIT
-[license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
+[![Github Actions][gha-badge]][gha] [![Foundry][foundry-badge]][foundry] [![License: MIT][license-badge]][license]
 
-A Foundry-based template for developing Solidity smart contracts, with sensible defaults.
+A minimalistic Solidity development template powered by Foundry. No bloat, just the essentials.
 
-## What's Inside
+---
 
-- [Forge](https://github.com/foundry-rs/foundry/blob/master/forge): compile, test, fuzz, format, and deploy smart
-  contracts
-- [Bun]: Foundry defaults to git submodules, but this template uses Node.js packages for managing dependencies
-- [Forge Std](https://github.com/foundry-rs/forge-std): collection of helpful contracts and utilities for testing
-- [Prettier](https://github.com/prettier/prettier): code formatter for non-Solidity files
-- [Solhint](https://github.com/protofire/solhint): linter for Solidity code
+## Quick Start
 
-## Getting Started
-
-Click the [`Use this template`](https://github.com/PaulRBerg/foundry-template/generate) button at the top of the page to
-create a new repository with this repo as the initial state.
-
-Or, if you prefer to install the template manually:
-
+**Use this template:**
 ```sh
-$ forge init --template PaulRBerg/foundry-template my-project
-$ cd my-project
-$ bun install # install Solhint, Prettier, and other Node.js deps
+forge init --template touchmeangel/foundry-template my-project
+cd my-project
 ```
 
-If this is your first time with Foundry, check out the
-[installation](https://github.com/foundry-rs/foundry#installation) instructions.
+Or click [`Use this template`](https://github.com/touchmeangel/foundry-template/generate) on GitHub.
 
-## Features
+**First time with Foundry?** → [Installation guide](https://github.com/foundry-rs/foundry#installation)
 
-This template builds upon the frameworks and libraries mentioned above, so please consult their respective documentation
-for details about their specific features.
+---
 
-For example, if you're interested in exploring Foundry in more detail, you should look at the
-[Foundry Book](https://book.getfoundry.sh). In particular, you may be interested in reading the
-[Writing Tests](https://book.getfoundry.sh/forge/writing-tests.html) tutorial.
+## Stack
 
-### Sensible Defaults
+- **[Forge](https://github.com/foundry-rs/foundry/blob/master/forge)** - compile, test, fuzz, format, deploy
+- **[Forge Std](https://github.com/foundry-rs/forge-std)** - testing utilities & helpers
+- **[Solhint](https://github.com/protofire/solhint)** - Solidity linting
 
-This template comes with a set of sensible default configurations for you to use. These defaults can be found in the
-following files:
+---
+
+## Commands
+
+### Development
+```sh
+forge build          # Compile contracts
+forge test           # Run tests
+forge test -vvv      # Run tests (verbose)
+forge fmt            # Format code
+forge clean          # Clean artifacts
+```
+
+### Analysis
+```sh
+forge coverage       # Coverage report
+forge test --gas-report  # Gas usage report
+```
+
+### Deployment
+```sh
+forge script script/Deploy.s.sol --broadcast --fork-url http://localhost:8545 --browser
+```
+*Starts server at localhost:9545 with wallet connection prompt*
+
+📖 [Solidity Scripting Tutorial](https://book.getfoundry.sh/tutorials/solidity-scripting.html) for testnet/mainnet deployment
+
+---
+
+## Configuration Files
+
+Pre-configured sensible defaults:
 
 ```text
-├── .editorconfig
-├── .gitignore
-├── .prettierignore
-├── .prettierrc.yml
-├── .solhint.json
-├── foundry.toml
-└── remappings.txt
+.editorconfig      # Editor settings
+.gitignore         # Git exclusions
+.prettierignore    # Prettier exclusions
+.prettierrc.yml    # Code formatting
+.solhint.json      # Solidity linting
+foundry.toml       # Foundry config
+remappings.txt     # Dependency mappings
 ```
 
-### VSCode Integration
+---
 
-This template is IDE agnostic, but for the best user experience, you may want to use it in VSCode alongside Nomic
-Foundation's [Solidity extension](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity).
+## Dependencies
 
-For guidance on how to integrate a Foundry project in VSCode, please refer to this
-[guide](https://book.getfoundry.sh/config/vscode).
+Bringing back submodules as not all repos have node_modules up to date and since this repo is minimal we dont need bun here
 
-### GitHub Actions
-
-This template comes with GitHub Actions pre-configured. Your contracts will be linted and tested on every push and pull
-request made to the `main` branch.
-
-You can edit the CI script in [.github/workflows/ci.yml](./.github/workflows/ci.yml).
-
-## Installing Dependencies
-
-Foundry typically uses git submodules to manage dependencies, but this template uses Node.js packages because
-[submodules don't scale](https://twitter.com/PaulRBerg/status/1736695487057531328).
-
-This is how to install dependencies:
-
-1. Install the dependency using your preferred package manager, e.g. `bun install dependency-name`
-   - Use this syntax to install from GitHub: `bun install github:username/repo-name`
-2. Add a remapping for the dependency in [remappings.txt](./remappings.txt), e.g.
-   `dependency-name=node_modules/dependency-name`
-
-Note that OpenZeppelin Contracts is pre-installed, so you can follow that as an example.
-
-## Writing Tests
-
-To write a new test contract, you start by importing `Test` from `forge-std`, and then you inherit it in your test
-contract. Forge Std comes with a pre-instantiated [cheatcodes](https://book.getfoundry.sh/cheatcodes/) environment
-accessible via the `vm` property. If you would like to view the logs in the terminal output, you can add the `-vvv` flag
-and use [console.log](https://book.getfoundry.sh/faq?highlight=console.log#how-do-i-use-consolelog).
-
-This template comes with an example test contract [Foo.t.sol](./tests/Foo.t.sol)
-
-## Usage
-
-This is a list of the most frequently needed commands.
-
-### Build
-
-Build the contracts:
-
+**Install a dependency:**
 ```sh
-$ forge build
+forge install dependency-name
 ```
 
-### Clean
-
-Delete the build artifacts and cache directories:
-
-```sh
-$ forge clean
+**Add remapping** in `remappings.txt`:
+```text
+dependency-name=lib/dependency-name
 ```
 
-### Compile
+*Example: OpenZeppelin Contracts comes pre-installed*
 
-Compile the contracts:
+---
 
-```sh
-$ forge build
+## Testing
+
+Import `Test` from `forge-std` and inherit in your test contracts:
+
+```solidity
+import { Test } from "forge-std/Test.sol";
+
+contract MyTest is Test {
+    // vm.* cheatcodes available
+    // console.log() for debugging
+}
 ```
 
-### Coverage
+📝 See example: [tests/Foo.t.sol](./tests/Foo.t.sol)  
+📖 Learn more: [Writing Tests](https://book.getfoundry.sh/forge/writing-tests.html)
 
-Get a test coverage report:
+---
 
-```sh
-$ forge coverage
-```
+## CI/CD
 
-### Deploy
+GitHub Actions auto-configured:
+- Runs on every push/PR to `main`
+- Lints & tests your contracts
+- Edit workflow: [.github/workflows/ci.yml](./.github/workflows/ci.yml)
 
-Deploy to Anvil:
+---
 
-```sh
-$ forge script script/Deploy.s.sol --broadcast --fork-url http://localhost:8545 --browser
-```
-Script will start a server listening at localhost:9545 (which you can expose if on ssh server)
-You will be prompted to connect your wallet in your default browser
-For instructions on how to deploy to a testnet or mainnet, check out the
-[Solidity Scripting](https://book.getfoundry.sh/tutorials/solidity-scripting.html) tutorial.
+## Editor Setup
 
-### Format
+**VSCode users:** Install [Solidity extension](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity)
 
-Format the contracts:
+📖 [VSCode integration guide](https://book.getfoundry.sh/config/vscode)
 
-```sh
-$ forge fmt
-```
+*Template works with any IDE*
 
-### Gas Usage
+---
 
-Get a gas report:
+## Resources
 
-```sh
-$ forge test --gas-report
-```
+**Learn Foundry:**
+- [Foundry Book](https://book.getfoundry.sh)
+- [Writing Tests](https://book.getfoundry.sh/forge/writing-tests.html)
+- [Cheatcodes Reference](https://book.getfoundry.sh/cheatcodes/)
 
-### Lint
-
-Lint the contracts:
-
-```sh
-$ bun run lint
-```
-
-### Test
-
-Run the tests:
-
-```sh
-$ forge test
-```
-
-### Test Coverage
-
-Generate test coverage and output result to the terminal:
-
-```sh
-$ bun run test:coverage
-```
-
-### Test Coverage Report
-
-Generate test coverage with lcov report (you'll have to open the `./coverage/index.html` file in your browser, to do so
-simply copy paste the path):
-
-```sh
-$ bun run test:coverage:report
-```
-
-> [!NOTE]
->
-> This command requires you to have [`lcov`](https://github.com/linux-test-project/lcov) installed on your machine. On
-> macOS, you can install it with Homebrew: `brew install lcov`.
-
-## Related Efforts
-
+**Similar Templates:**
+- [PaulRBerg/foundry-template](https://github.com/PaulRBerg/foundry-template)
 - [foundry-rs/forge-template](https://github.com/foundry-rs/forge-template)
 - [abigger87/femplate](https://github.com/abigger87/femplate)
 - [cleanunicorn/ethereum-smartcontract-template](https://github.com/cleanunicorn/ethereum-smartcontract-template)
 - [FrankieIsLost/forge-template](https://github.com/FrankieIsLost/forge-template)
 
+---
+
 ## License
 
-This project is licensed under MIT.
+MIT
+
+---
+
+[gha]: https://github.com/touchmeangel/foundry-template/actions
+[gha-badge]: https://github.com/touchmeangel/foundry-template/actions/workflows/ci.yml/badge.svg
+[foundry]: https://getfoundry.sh/
+[foundry-badge]: https://img.shields.io/badge/Built%20with-Foundry-FFDB1C.svg
+[license]: https://opensource.org/licenses/MIT
+[license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
