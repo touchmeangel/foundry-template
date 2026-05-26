@@ -1,7 +1,10 @@
 {
   "name": "Foundry Template",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "args": {
+      "PLATFORM": "linux/amd64"  // Force x86_64
+    }
   },
   "customizations": {
     "vscode": {
